@@ -1,3 +1,5 @@
+import dotenv from 'dotenv';
+dotenv.config();
 import express from 'express';
 import mongoose from 'mongoose';
 import Messages from './dbMessages.js';
@@ -9,12 +11,13 @@ const app= express();
 const port= process.env.PORT || 9000;
 
 var pusher = new Pusher({
-    appId: '1073337',
-    key: 'pusher-key',
-    secret: 'pusher-secret',
-    cluster: 'pusher-cluster',
-    encrypted: true
+    appId: "1262314",
+    key: "c9b95814ba7f97fd9aa7",
+    secret: "e3c03cd4277d3a61378e",
+    cluster: "ap2",
+    useTLS: true
   });
+  
 
 app.use(morgan('dev'));
 app.use(express.json());
@@ -26,7 +29,7 @@ app.use(express.json());
 });
  */
 app.use(cors());
-const connection_url= 'connection url';
+const connection_url= process.env.DATABASE_URL.replace('<PASSWORD>',process.env.DATABASE_PASSWORD);
 mongoose.connect(connection_url,{
     useCreateIndex: true,  
     useNewUrlParser:true,
